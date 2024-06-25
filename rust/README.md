@@ -15,3 +15,10 @@
 `cargo build`
 
 `cargo run`
+
+## Projects
+
+- Concurrent Web Server
+- Blockchain Implementation
+- Ray Tracer
+- Networked Chat Application

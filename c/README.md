@@ -11,3 +11,8 @@
 `gcc -o demo demo.c`
 
 `./demo`
+
+## Projects
+
+- Database Management System (DBMS)
+- File Encryption/Decryption Tool

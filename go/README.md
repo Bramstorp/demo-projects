@@ -19,3 +19,11 @@
 `go build demo.go`
 
 `./demo`
+
+## Projects
+
+- RESTful API Server
+- Task Scheduler
+- Distributed Key-Value Store
+- Web Scraper
+- Real-time Chat Application

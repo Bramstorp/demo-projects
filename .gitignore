@@ -1,5 +1,7 @@
 # C Project Ignore Patterns
 
+build
+
 # Object files
 *.o
 *.obj

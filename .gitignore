@@ -101,3 +101,8 @@ go.work.sum
 # Testing artifacts
 *.test
 testdata/
+
+
+# Ignore go tar.gz file
+
+*.tar.gz

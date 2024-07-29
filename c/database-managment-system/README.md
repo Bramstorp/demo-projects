@@ -6,10 +6,15 @@
 
 # Build
 
-`gcc -o build/dbms database-managment-system.c -l sqlite3`
+`gcc -o build/dbms main.c database.c -l sqlite3`
 
 `./build/dbms`
 
 # Test DB
 
 `sqlite3 dbms.db`
+
+# Build and Run
+
+`chmod +x run.sh`
+`./run`

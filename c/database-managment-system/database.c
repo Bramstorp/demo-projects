@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <sqlite3.h>
+#include "database.h"
 
 #define MAX_LENGTH 50
 
@@ -65,7 +66,7 @@ void createAccount()
     sqlite3_free(sql);
 }
 
-int checkLogin(const char *username, const char *password)
+int checkLogin(char *username, char *password)
 {
     char *sql = sqlite3_mprintf("SELECT * FROM users WHERE username = '%q' AND password = '%q';", username, password);
     sqlite3_stmt *stmt;
@@ -84,68 +85,7 @@ int checkLogin(const char *username, const char *password)
     return (rc == SQLITE_ROW);
 }
 
-int login()
+void closeDatabase()
 {
-    char username[MAX_LENGTH];
-    char password[MAX_LENGTH];
-
-    printf("Login\n");
-
-    printf("Username: ");
-    scanf("%s", username);
-    getchar();
-
-    printf("Password: ");
-    scanf("%s", password);
-    getchar();
-
-    if (checkLogin(username, password))
-    {
-        printf("Login successful!\n");
-        return 1;
-    }
-    else
-    {
-        printf("Login failed. Incorrect username or password.\n");
-        return 0;
-    }
-}
-
-int main()
-{
-    int choice;
-
-    if (!openDatabase() || !createTable())
-    {
-        return 1;
-    }
-
-    do
-    {
-        printf("\nMenu:\n");
-        printf("1. Login\n");
-        printf("2. Create Account\n");
-        printf("0. Exit\n");
-        printf("Enter your choice: ");
-        scanf("%d", &choice);
-        getchar();
-
-        switch (choice)
-        {
-        case 1:
-            login();
-            break;
-        case 2:
-            createAccount();
-            break;
-        case 0:
-            printf("Exiting program. Goodbye!\n");
-            break;
-        default:
-            printf("Invalid choice. Please try again.\n");
-        }
-    } while (choice != 0);
-
     sqlite3_close(db);
-    return 0;
 }

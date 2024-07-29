@@ -8,6 +8,8 @@
 
 `gcc -o build/dbms main.c database.c -l sqlite3`
 
+# Run
+
 `./build/dbms`
 
 # Test DB

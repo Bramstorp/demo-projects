@@ -1,72 +1,72 @@
-Features to add to a DBMS project:
+# DBMS Project Todo List
 
 1. Table operations:
 
-   - Create table
-   - Drop table
-   - Alter table (add/remove columns)
+   - [ ] Implement Create table functionality
+   - [ ] Implement Drop table functionality
+   - [ ] Implement Alter table functionality (add/remove columns)
 
 2. Data manipulation:
 
-   - Insert records
-   - Update records
-   - Delete records
+   - [ ] Implement Insert records functionality
+   - [ ] Implement Update records functionality
+   - [ ] Implement Delete records functionality
 
 3. Query operations:
 
-   - Select data with various conditions
-   - Join operations between tables
-   - Aggregate functions (COUNT, SUM, AVG, etc.)
+   - [ ] Implement Select data with various conditions
+   - [ ] Implement Join operations between tables
+   - [ ] Implement Aggregate functions (COUNT, SUM, AVG, etc.)
 
 4. Index management:
 
-   - Create index
-   - Drop index
+   - [ ] Implement Create index functionality
+   - [ ] Implement Drop index functionality
 
 5. Transaction management:
 
-   - Begin transaction
-   - Commit
-   - Rollback
+   - [ ] Implement Begin transaction functionality
+   - [ ] Implement Commit functionality
+   - [ ] Implement Rollback functionality
 
 6. Data integrity:
 
-   - Implement constraints (PRIMARY KEY, FOREIGN KEY, UNIQUE, CHECK)
+   - [ ] Implement constraints (PRIMARY KEY, FOREIGN KEY, UNIQUE, CHECK)
 
 7. View management:
 
-   - Create view
-   - Drop view
+   - [ ] Implement Create view functionality
+   - [ ] Implement Drop view functionality
 
 8. User management:
 
-   - Grant/revoke privileges
+   - [ ] Implement Grant/revoke privileges functionality
 
 9. Backup and restore:
 
-   - Dump database to file
-   - Restore database from file
+   - [ ] Implement Dump database to file functionality
+   - [ ] Implement Restore database from file functionality
 
 10. Query optimization:
 
-    - Implement a simple query optimizer
+    - [ ] Implement a simple query optimizer
 
 11. Concurrency control:
 
-    - Implement basic locking mechanisms
+    - [ ] Implement basic locking mechanisms
 
 12. Data export/import:
 
-    - Export data to CSV
-    - Import data from CSV
+    - [ ] Implement Export data to CSV functionality
+    - [ ] Implement Import data from CSV functionality
 
 13. Stored procedures and functions:
 
-    - Create and execute stored procedures
+    - [ ] Implement Create and execute stored procedures functionality
 
 14. Triggers:
 
-    - Implement basic database triggers
+    - [ ] Implement basic database triggers
 
 15. Query parser:
-    - Develop a simple SQL parser for custom queries
+    - [ ] Develop a simple SQL parser for custom queries

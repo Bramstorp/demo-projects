@@ -5,7 +5,7 @@ gcc -o build/dbms main.c database.c -l sqlite3
 
 # Check if compilation was successful
 if [ $? -eq 0 ]; then
-    # Run the program
+    # Run the build
     ./build/dbms
 else
     echo "Compilation failed"

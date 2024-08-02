@@ -12,15 +12,13 @@ void createUserTable()
 {
     Column columns[] = {
         {"username", VARCHAR, 50},
-        {"password", VARCHAR, 50}};
-    if (create_table("users", 2, columns))
-    {
-        printf("User table created successfully!\n");
-    }
-    else
-    {
-        printf("Failed to create user table.\n");
-    }
+        {"password", VARCHAR, 50},
+    };
+
+    int lengthOfColumns = sizeof(columns) / sizeof(Column);
+
+    create_table("users", lengthOfColumns, columns);
+    return;
 }
 
 void createCustomTableMenu()

@@ -1,7 +1,7 @@
 #ifndef ACCOUNT_H
 #define ACCOUNT_H
 
-int createAccount();
+int create_account();
 int login();
 
 #endif

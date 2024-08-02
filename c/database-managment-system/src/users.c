@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 
-int checkLogin(char *username, char *password)
+int check_login(char *username, char *password)
 {
     char filename[256];
     snprintf(filename, sizeof(filename), "data/users.tbl");
@@ -35,7 +35,7 @@ int checkLogin(char *username, char *password)
     return 0;
 }
 
-void createAccount()
+void create_account()
 {
     char username[MAX_INPUT], password[MAX_INPUT];
     printf("Enter username: ");
@@ -43,7 +43,7 @@ void createAccount()
     printf("Enter password: ");
     scanf("%s", password);
 
-    if (checkLogin(username, password))
+    if (check_login(username, password))
     {
         printf("Account already exists.\n");
         return;
@@ -70,5 +70,5 @@ int login()
     printf("Enter password: ");
     scanf("%s", password);
 
-    return checkLogin(username, password);
+    return check_login(username, password);
 }

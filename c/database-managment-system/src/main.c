@@ -5,10 +5,11 @@
 #include "../includes/database.h"
 #include "../includes/table_ops.h"
 #include "../includes/users.h"
+#include "../includes/buffer_pool.h"
 
 #define MAX_INPUT 100
 
-void createUserTable()
+void create_user_table()
 {
     Column columns[] = {
         {"username", VARCHAR, 50},
@@ -130,7 +131,7 @@ void insertIntoTableMenu()
     free(columns);
 }
 
-void showMainMenu()
+void show_main_menu()
 {
     int choice;
     do
@@ -165,7 +166,8 @@ int main()
     int choice;
     int loggedIn = 0;
 
-    createUserTable();
+    init_buffer_pool();
+    create_user_table();
 
     do
     {
@@ -186,7 +188,7 @@ int main()
                 {
                     printf("Login successful!\n");
                     loggedIn = 1;
-                    showMainMenu();
+                    show_main_menu();
                     loggedIn = 0;
                 }
                 else
@@ -195,7 +197,7 @@ int main()
                 }
                 break;
             case 2:
-                createAccount();
+                create_account();
                 break;
             case 0:
                 printf("Exiting program. Goodbye!\n");

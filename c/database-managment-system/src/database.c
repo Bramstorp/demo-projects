@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <sqlite3.h>
-#include "database.h"
+#include "../includes/database.h"
 
 #define MAX_LENGTH 50
 
@@ -9,7 +9,7 @@ sqlite3 *db;
 
 int openDatabase()
 {
-    int rc = sqlite3_open("dbms.db", &db);
+    int rc = sqlite3_open("data/dbms.db", &db);
     if (rc)
     {
         fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));

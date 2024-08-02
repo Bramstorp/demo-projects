@@ -2,9 +2,9 @@
 
 ## 1. Project Setup
 
-- [:white_check_mark:] Create project structure
-- [:white_check_mark:] Set up build system (Makefile or CMake)
-- [:white_check_mark:] Initialize version control
+- [X] Create project structure
+- [X] Set up build system (Makefile or CMake)
+- [X] Initialize version control
 
 ## 2. Data Storage
 

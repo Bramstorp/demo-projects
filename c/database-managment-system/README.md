@@ -2,21 +2,7 @@
 
 `sudo apt-get install sqlite3`
 
-`mkdir build`
+# Setup and run
 
-# Build
-
-`gcc -o build/dbms main.c database.c -l sqlite3`
-
-# Run
-
-`./build/dbms`
-
-# Test DB
-
-`sqlite3 dbms.db`
-
-# Build and Run
-
-`chmod +x run.sh`
-`./run`
+`Make`
+`Make run`

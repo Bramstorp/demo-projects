@@ -1,91 +1,41 @@
+// src/database.c
 #include <stdio.h>
 #include <string.h>
-#include <sqlite3.h>
+#include <stdlib.h>
 #include "../includes/database.h"
+#include "../includes/table_ops.h"
 
-#define MAX_LENGTH 50
-
-sqlite3 *db;
-
-int openDatabase()
+int get_num_columns(const char *table_name)
 {
-    int rc = sqlite3_open("data/dbms.db", &db);
-    if (rc)
-    {
-        fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
-        return 0;
-    }
-    return 1;
+    char filename[256];
+    snprintf(filename, sizeof(filename), "data/%s.tbl", table_name);
+
+    FILE *file = fopen(filename, "rb");
+    if (!file)
+        return -1;
+
+    int num_columns;
+    fread(&num_columns, sizeof(int), 1, file);
+
+    fclose(file);
+    return num_columns;
 }
 
-int createTable()
+Column *get_columns(const char *table_name)
 {
-    char *sql = "CREATE TABLE IF NOT EXISTS users (username TEXT PRIMARY KEY, password TEXT NOT NULL);";
-    char *errMsg = 0;
-    int rc = sqlite3_exec(db, sql, 0, 0, &errMsg);
-    if (rc != SQLITE_OK)
-    {
-        fprintf(stderr, "SQL error: %s\n", errMsg);
-        sqlite3_free(errMsg);
-        return 0;
-    }
-    return 1;
-}
+    char filename[256];
+    snprintf(filename, sizeof(filename), "data/%s.tbl", table_name);
 
-void createAccount()
-{
-    char username[MAX_LENGTH];
-    char password[MAX_LENGTH];
-    char *sql;
-    char *errMsg = 0;
-    int rc;
+    FILE *file = fopen(filename, "rb");
+    if (!file)
+        return NULL;
 
-    printf("Create a new account\n");
+    int num_columns;
+    fread(&num_columns, sizeof(int), 1, file);
 
-    printf("Enter new username: ");
-    scanf("%s", username);
-    getchar();
+    Column *columns = malloc(num_columns * sizeof(Column));
+    fread(columns, sizeof(Column), num_columns, file);
 
-    printf("Enter new password: ");
-    scanf("%s", password);
-    getchar();
-
-    sql = sqlite3_mprintf("INSERT INTO users (username, password) VALUES ('%q', '%q');", username, password);
-
-    rc = sqlite3_exec(db, sql, 0, 0, &errMsg);
-    if (rc != SQLITE_OK)
-    {
-        fprintf(stderr, "SQL error: %s\n", errMsg);
-        sqlite3_free(errMsg);
-    }
-    else
-    {
-        printf("\nAccount created successfully!\n");
-    }
-
-    sqlite3_free(sql);
-}
-
-int checkLogin(char *username, char *password)
-{
-    char *sql = sqlite3_mprintf("SELECT * FROM users WHERE username = '%q' AND password = '%q';", username, password);
-    sqlite3_stmt *stmt;
-    int rc = sqlite3_prepare_v2(db, sql, -1, &stmt, 0);
-
-    if (rc != SQLITE_OK)
-    {
-        fprintf(stderr, "Failed to prepare statement\n");
-        return 0;
-    }
-
-    rc = sqlite3_step(stmt);
-    sqlite3_finalize(stmt);
-    sqlite3_free(sql);
-
-    return (rc == SQLITE_ROW);
-}
-
-void closeDatabase()
-{
-    sqlite3_close(db);
+    fclose(file);
+    return columns;
 }

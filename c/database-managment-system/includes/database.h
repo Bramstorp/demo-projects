@@ -1,14 +1,9 @@
 #ifndef DATABASE_H
 #define DATABASE_H
 
-#include <sqlite3.h>
+#include "table_ops.h"
 
-extern sqlite3 *db;
-
-int openDatabase();
-int createTable();
-void createAccount();
-int checkLogin(char *username, char *password);
-void closeDatabase();
+int get_num_columns(const char *table_name);
+Column *get_columns(const char *table_name);
 
 #endif

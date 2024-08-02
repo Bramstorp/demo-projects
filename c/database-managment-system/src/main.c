@@ -1,48 +1,146 @@
+// src/main.c
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "../includes/database.h"
+#include "../includes/table_ops.h"
+#include "../includes/users.h"
 
-int login()
+#define MAX_INPUT 100
+
+void createUserTable()
 {
-    char username[50];
-    char password[50];
-
-    printf("Login\n");
-
-    printf("Username: ");
-    scanf("%s", username);
-    getchar();
-
-    printf("Password: ");
-    scanf("%s", password);
-    getchar();
-
-    if (checkLogin(username, password))
+    Column columns[] = {
+        {"username", VARCHAR, 50},
+        {"password", VARCHAR, 50}};
+    if (create_table("users", 2, columns))
     {
-        printf("Login successful!\n");
-        return 1;
+        printf("User table created successfully!\n");
     }
     else
     {
-        printf("Login failed. Incorrect username or password.\n");
-        return 0;
+        printf("Failed to create user table.\n");
     }
 }
 
-int main()
+void createCustomTableMenu()
 {
-    int choice;
+    char table_name[MAX_INPUT];
+    int num_columns;
+    Column columns[MAX_COLUMNS];
 
-    if (!openDatabase() || !createTable())
+    printf("Enter table name: ");
+    scanf("%s", table_name);
+
+    printf("Enter number of columns: ");
+    scanf("%d", &num_columns);
+
+    for (int i = 0; i < num_columns; i++)
     {
-        return 1;
+        printf("Column %d name: ", i + 1);
+        scanf("%s", columns[i].name);
+
+        printf("Column %d type (0=INT, 1=FLOAT, 2=VARCHAR): ", i + 1);
+        int type;
+        scanf("%d", &type);
+        columns[i].type = (DataType)type;
+
+        if (type == VARCHAR)
+        {
+            printf("Column %d size: ", i + 1);
+            scanf("%d", &columns[i].size);
+        }
+        else
+        {
+            columns[i].size = 0;
+        }
     }
 
+    if (create_table(table_name, num_columns, columns))
+    {
+        printf("Table created successfully!\n");
+    }
+    else
+    {
+        printf("Failed to create table.\n");
+    }
+}
+
+void insertIntoTableMenu()
+{
+    char table_name[MAX_INPUT];
+    printf("Enter table name: ");
+    scanf("%s", table_name);
+
+    int num_columns = get_num_columns(table_name);
+    if (num_columns == -1)
+    {
+        printf("Table not found.\n");
+        return;
+    }
+
+    Column *columns = get_columns(table_name);
+    if (columns == NULL)
+    {
+        printf("Failed to get column information.\n");
+        return;
+    }
+
+    void *values[MAX_COLUMNS];
+    for (int i = 0; i < num_columns; i++)
+    {
+        printf("Enter value for %s: ", columns[i].name);
+        switch (columns[i].type)
+        {
+        case INT:
+        {
+            int *value = malloc(sizeof(int));
+            scanf("%d", value);
+            values[i] = value;
+            break;
+        }
+        case FLOAT:
+        {
+            float *value = malloc(sizeof(float));
+            scanf("%f", value);
+            values[i] = value;
+            break;
+        }
+        case VARCHAR:
+        {
+            char *value = malloc(columns[i].size);
+            scanf("%s", value);
+            values[i] = value;
+            break;
+        }
+        }
+    }
+
+    if (insert_record(table_name, values))
+    {
+        printf("Record inserted successfully!\n");
+    }
+    else
+    {
+        printf("Failed to insert record.\n");
+    }
+
+    for (int i = 0; i < num_columns; i++)
+    {
+        free(values[i]);
+    }
+    free(columns);
+}
+
+void showMainMenu()
+{
+    int choice;
     do
     {
-        printf("\nMenu:\n");
-        printf("1. Login\n");
-        printf("2. Create Account\n");
-        printf("0. Exit\n");
+        printf("\nMain Menu:\n");
+        printf("1. Create Custom Table\n");
+        printf("2. Insert Into Table\n");
+        printf("3. Logout\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
         getchar();
@@ -50,19 +148,65 @@ int main()
         switch (choice)
         {
         case 1:
-            login();
+            createCustomTableMenu();
             break;
         case 2:
-            createAccount();
+            insertIntoTableMenu();
             break;
-        case 0:
-            printf("Exiting program. Goodbye!\n");
-            break;
+        case 3:
+            printf("Logging out...\n");
+            return;
         default:
             printf("Invalid choice. Please try again.\n");
         }
+    } while (choice != 3);
+}
+
+int main()
+{
+    int choice;
+    int loggedIn = 0;
+
+    createUserTable();
+
+    do
+    {
+        if (!loggedIn)
+        {
+            printf("\nLogin Menu:\n");
+            printf("1. Login\n");
+            printf("2. Create Account\n");
+            printf("0. Exit\n");
+            printf("Enter your choice: ");
+            scanf("%d", &choice);
+            getchar();
+
+            switch (choice)
+            {
+            case 1:
+                if (login())
+                {
+                    printf("Login successful!\n");
+                    loggedIn = 1;
+                    showMainMenu();
+                    loggedIn = 0;
+                }
+                else
+                {
+                    printf("Login failed. Incorrect username or password.\n");
+                }
+                break;
+            case 2:
+                createAccount();
+                break;
+            case 0:
+                printf("Exiting program. Goodbye!\n");
+                break;
+            default:
+                printf("Invalid choice. Please try again.\n");
+            }
+        }
     } while (choice != 0);
 
-    closeDatabase();
     return 0;
 }

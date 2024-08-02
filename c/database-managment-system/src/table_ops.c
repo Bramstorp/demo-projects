@@ -5,15 +5,15 @@
 
 int create_table(const char *table_name, int num_columns, Column *columns)
 {
-    char filename[256];
-    snprintf(filename, sizeof(filename), "data/%s.tbl", table_name);
+    char filename[256];                                              // filename buffer
+    snprintf(filename, sizeof(filename), "data/%s.tbl", table_name); // create filename
 
-    FILE *file = fopen(filename, "wb");
+    FILE *file = fopen(filename, "wb"); // open file for writing in binary mode
     if (!file)
         return 0;
 
-    fwrite(&num_columns, sizeof(int), 1, file);
-    fwrite(columns, sizeof(Column), num_columns, file);
+    fwrite(&num_columns, sizeof(int), 1, file);         // write number of columns to file
+    fwrite(columns, sizeof(Column), num_columns, file); // write columns to file
 
     fclose(file);
     return 1;

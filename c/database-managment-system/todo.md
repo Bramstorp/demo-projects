@@ -1,72 +1,95 @@
-# DBMS Project Todo List
+# C Project: Database Management System Implementation
 
-1. Table operations:
+## 1. Project Setup
 
-   - [ ] Implement Create table functionality
-   - [ ] Implement Drop table functionality
-   - [ ] Implement Alter table functionality (add/remove columns)
+- [ ] Create project structure
+- [ ] Set up build system (Makefile or CMake)
+- [ ] Initialize version control
 
-2. Data manipulation:
+## 2. Data Storage
 
-   - [ ] Implement Insert records functionality
-   - [ ] Implement Update records functionality
-   - [ ] Implement Delete records functionality
+- [ ] Design file format for table storage
+- [ ] Implement functions to create and delete tables
+- [ ] Develop methods for reading and writing records
 
-3. Query operations:
+## 3. Memory Management
 
-   - [ ] Implement Select data with various conditions
-   - [ ] Implement Join operations between tables
-   - [ ] Implement Aggregate functions (COUNT, SUM, AVG, etc.)
+- [ ] Implement a buffer pool for caching pages
+- [ ] Develop a page replacement policy (e.g., LRU)
+- [ ] Create memory-mapped file I/O for efficiency
 
-4. Index management:
+## 4. Indexing
 
-   - [ ] Implement Create index functionality
-   - [ ] Implement Drop index functionality
+- [ ] Implement B-tree data structure
+- [ ] Develop functions for B-tree insertion and deletion
+- [ ] Create methods for B-tree searching and traversal
+- [ ] Implement index creation on table columns
 
-5. Transaction management:
+## 5. Query Processing
 
-   - [ ] Implement Begin transaction functionality
-   - [ ] Implement Commit functionality
-   - [ ] Implement Rollback functionality
+- [ ] Design a simple query language
+- [ ] Implement a lexer and parser for the query language
+- [ ] Develop a query execution engine
+- [ ] Implement basic operations: SELECT, INSERT, UPDATE, DELETE
 
-6. Data integrity:
+## 6. Transaction Management
 
-   - [ ] Implement constraints (PRIMARY KEY, FOREIGN KEY, UNIQUE, CHECK)
+- [ ] Implement ACID properties
+- [ ] Develop logging mechanism for recovery
+- [ ] Create checkpoint system
+- [ ] Implement two-phase locking for concurrency control
 
-7. View management:
+## 7. Query Optimization
 
-   - [ ] Implement Create view functionality
-   - [ ] Implement Drop view functionality
+- [ ] Implement basic statistics collection on tables
+- [ ] Develop a simple cost-based optimizer
+- [ ] Create index selection logic
 
-8. User management:
+## 8. Concurrency Control
 
-   - [ ] Implement Grant/revoke privileges functionality
+- [ ] Implement multi-threading support
+- [ ] Develop lock manager for row-level locking
+- [ ] Implement deadlock detection and resolution
 
-9. Backup and restore:
+## 9. Recovery System
 
-   - [ ] Implement Dump database to file functionality
-   - [ ] Implement Restore database from file functionality
+- [ ] Implement write-ahead logging (WAL)
+- [ ] Develop crash recovery procedures
+- [ ] Create system for managing savepoints
 
-10. Query optimization:
+## 10. SQL Support
 
-    - [ ] Implement a simple query optimizer
+- [ ] Extend parser to support basic SQL syntax
+- [ ] Implement JOIN operations
+- [ ] Add support for aggregate functions (COUNT, SUM, AVG, etc.)
+- [ ] Implement subquery support
 
-11. Concurrency control:
+## 11. User Interface
 
-    - [ ] Implement basic locking mechanisms
+- [ ] Create a simple command-line interface
+- [ ] Implement results formatting and display
+- [ ] Add basic user authentication and authorization
 
-12. Data export/import:
+## 12. Testing
 
-    - [ ] Implement Export data to CSV functionality
-    - [ ] Implement Import data from CSV functionality
+- [ ] Develop unit tests for core components
+- [ ] Create integration tests for DBMS operations
+- [ ] Implement performance benchmarking suite
 
-13. Stored procedures and functions:
+## 13. Documentation
 
-    - [ ] Implement Create and execute stored procedures functionality
+- [ ] Write inline code documentation
+- [ ] Create user manual with SQL syntax guide
+- [ ] Develop system architecture documentation
 
-14. Triggers:
+## 14. Optimization (Optional)
 
-    - [ ] Implement basic database triggers
+- [ ] Implement query result caching
+- [ ] Develop support for prepared statements
+- [ ] Create index advisor for suggesting useful indexes
 
-15. Query parser:
-    - [ ] Develop a simple SQL parser for custom queries
+## 15. Advanced Features (Optional)
+
+- [ ] Implement basic data replication
+- [ ] Add support for stored procedures
+- [ ] Develop a simple trigger system

@@ -1,4 +1,4 @@
-# Setup
+# Setup C
 
 `sudo apt-get install sqlite3`
 

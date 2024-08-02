@@ -4,5 +4,6 @@
 
 # Setup and run
 
+`Make clean`
 `Make`
 `Make run`

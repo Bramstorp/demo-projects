@@ -2,15 +2,15 @@
 
 ## 1. Project Setup
 
-- [X] Create project structure
-- [X] Set up build system (Makefile or CMake)
-- [X] Initialize version control
+- [x] Create project structure
+- [x] Set up build system (Makefile or CMake)
+- [x] Initialize version control
 
 ## 2. Data Storage
 
-- [ ] Design file format for table storage
-- [ ] Implement functions to create and delete tables
-- [ ] Develop methods for reading and writing records
+- [x] Design file format for table storage
+- [x] Implement functions to create and delete tables
+- [x] Develop methods for reading and writing records
 
 ## 3. Memory Management
 
